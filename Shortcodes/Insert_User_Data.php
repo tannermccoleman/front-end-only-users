@@ -9,7 +9,7 @@ function Insert_User_Data($atts) {
 		$UserCookie = CheckLoginCookie();
 		
 		$User = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ewd_feup_user_table_name WHERE Username='%s'", $UserCookie['Username']));
-		
+		if (empty($User)){ return false; }
 		$ReturnString = "";
 		
 		// Get the attributes passed by the shortcode, and store them in new variables for processing
