@@ -14,9 +14,9 @@ $HashedPassword = sha1(substr($Cookie, strrpos($Cookie, "%")+1));
 
 if (isset($_COOKIE[$CookieName]) and $TimeStamp < (time() + $LoginTime*60)) {
 		$UserDB = $wpdb->get_row($wpdb->prepare("SELECT User_Password FROM $ewd_feup_user_table_name WHERE Username ='%s'", $Username));
-		$HashedDBPassword = $UserDB->User_Password;
+		$HashedDBPassword = (!empty($UserDB->User_Password)) ? $UserDB->User_Password : null;
 		
-		if ($HashedDBPassword == $HashedPassword) {
+		if (!is_null($HashedDBPassword) && $HashedDBPassword == $HashedPassword) {
 			  $User = array('Username' => $Username, 'User_Password' => $UserDB->User_Password);
 			  return $User;
 		}
