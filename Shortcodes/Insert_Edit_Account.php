@@ -4,6 +4,8 @@ function Insert_Edit_Account_Form($atts) {
 		global $ewd_feup_user_table_name;
 		
 		$Custom_CSS = get_option("EWD_FEUP_Custom_CSS");
+		$Salt = get_option("EWD_FEUP_Hash_Salt");
+		$Time = time();
 		
 		$CheckCookie = CheckLoginCookie();
 		
