@@ -62,7 +62,7 @@ function Add_Edit_User() {
 	if (!isset($error)) {
 		/* Pass the data to the appropriate function in Update_Admin_Databases.php to create the user */
 		if ($_POST['action'] == "Add_User" or $_POST['ewd-feup-action'] == "register") {
-			if ($User->User_ID != "") {$user_update = __("There is already an account with that Username. Please select a different one.", "EWD_FEUP"); return $user_update;}
+			if (is_object($User) && isset($User->User_ID) && $User->User_ID != "") {$user_update = __("There is already an account with that Username. Please select a different one.", "EWD_FEUP"); return $user_update;}
 			if (!isset($User_Fields['User_Admin_Approved'])) {$User_Fields['User_Admin_Approved'] = "No";}
 			if (!isset($User_Fields['User_Email_Confirmed'])) {$User_Fields['User_Email_Confirmed'] = "No";}
 			$User_Fields['User_Date_Created'] = $date;
@@ -256,7 +256,7 @@ function Handle_File_Upload($Field_Name) {
 
 function EWD_FEUP_RandomString($CharLength = 10)
 {
-    $characters = ’0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ’;
+    $characters = Â’0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZÂ’;
     $randstring = '';
     for ($i = 0; $i < $CharLength; $i++) {
         $randstring .= $characters[rand(0, strlen($characters))];
