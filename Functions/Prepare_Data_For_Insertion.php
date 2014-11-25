@@ -256,7 +256,7 @@ function Handle_File_Upload($Field_Name) {
 
 function EWD_FEUP_RandomString($CharLength = 10)
 {
-    $characters = 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ;
+    $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $randstring = '';
     for ($i = 0; $i < $CharLength; $i++) {
         $randstring .= $characters[rand(0, strlen($characters))];
