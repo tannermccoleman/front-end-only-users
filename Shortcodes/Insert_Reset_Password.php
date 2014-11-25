@@ -4,6 +4,17 @@ function Insert_Edit_Account_Form($atts) {
 	global $ewd_feup_user_table_name;
 		
 	$Custom_CSS = get_option("EWD_FEUP_Custom_CSS");
+	
+	// Get the attributes passed by the shortcode, and store them in new variables for processing
+	extract( shortcode_atts( array(
+				'redirect_page' => '#',
+				'login_page' => '',
+				'submit_text' => __('Update Account', 'EWD_FEUP')),
+			$atts
+		)
+	);
+		
+	$ReturnString = "";
 		
 	$CheckCookie = CheckLoginCookie();
 		
@@ -16,17 +27,6 @@ function Insert_Edit_Account_Form($atts) {
 	/*$Sql = "SELECT * FROM $ewd_feup_fields_table_name ";
 	$Fields = $wpdb->get_results($Sql);*/
 	$User = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ewd_feup_user_table_name WHERE Username='%s'", $CheckCookie['Username']));
-		
-	$ReturnString = "";
-		
-	// Get the attributes passed by the shortcode, and store them in new variables for processing
-	extract( shortcode_atts( array(
-				'redirect_page' => '#',
-				'login_page' => '',
-				'submit_text' => __('Update Account', 'EWD_FEUP')),
-			$atts
-		)
-	);
 												
 	$ReturnString .= "<style type='text/css'>";
 	$ReturnString .= $Custom_CSS;
